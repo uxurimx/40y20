@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurante Estrella 40 y 20 | La Vidente del Amor</title>
+    <!-- Tailwind CSS para estructura rápida y responsiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fuentes de Google: Playfair Display (Elegante) y Lato (Lectura), Cinzel (Mística) -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Iconos (Lucide) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <style>
+        /* --- ESTILOS PERSONALIZADOS (CSS) --- */
+        
+        :root {
+            --rest-bg: #f4f1ea; /* Beige suave imagen referencia */
+            --rest-accent: #8b5e3c; /* Café madera */
+            --rest-dark: #4a3b2a;
+            --tarot-bg: #4c1d95; /* Lila/Morado oscuro */
+            --tarot-gold: #d4af37; /* Dorado */
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background-color: var(--rest-bg);
+            overflow-x: hidden;
+        }
+
+        /* Tipografía de Títulos */
+        h1, h2, h3, .font-serif {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Efecto de Cinta (Ribbon) como en la imagen de referencia */
+        .ribbon-container {
+            position: relative;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .ribbon {
+            background: var(--rest-accent);
+            color: #fff;
+            display: inline-block;
+            padding: 10px 40px;
+            position: relative;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .ribbon::before, .ribbon::after {
+            content: "";
+            position: absolute;
+            top: 10px;
+            z-index: -1;
+            border: 20px solid darken(var(--rest-accent), 20%);
+        }
+        
+        /* Estilo Polaroid para imágenes */
+        .polaroid {
+            background: white;
+            padding: 10px 10px 30px 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+            z-index: 10;
+        }
+        .polaroid:nth-child(2) { transform: rotate(2deg); }
+        .polaroid:nth-child(3) { transform: rotate(-1deg); }
+
+        /* SECCIÓN TAROT */
+        .tarot-section {
+            background: linear-gradient(135deg, #2e1065 0%, #581c87 100%);
+            color: #f3e8ff;
+            border-top: 4px solid var(--tarot-gold);
+            border-bottom: 4px solid var(--tarot-gold);
+            position: relative;
+        }
+        
+        .tarot-title {
+            font-family: 'Cinzel', serif;
+            color: var(--tarot-gold);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .gold-border {
+            border: 1px solid var(--tarot-gold);
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+        }
+
+        .card-flip {
+            perspective: 1000px;
+        }
+        .card-inner {
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        .card-flip:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+        }
+        .card-back {
+            transform: rotateY(180deg);
+        }
+
+        /* Navegación Móvil */
+        #mobile-menu {
+            transition: max-height 0.3s ease-out;
+            max-height: 0;
+            overflow: hidden;
+        }
+        #mobile-menu.open {
+            max-height: 400px;
+        }
+
+        /* Textura de papel sutil */
+        .paper-texture {
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+        }
+    </style>
+</head>
+<body class="text-stone-800 paper-texture flex flex-col min-h-screen">
+
+    <!-- HEADER -->
+    <header class="bg-[#4a3b2a] text-[#f4f1ea] sticky top-0 z-50 shadow-lg border-b-4 border-[#8b5e3c]">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <i data-lucide="utensils-crossed" class="w-6 h-6 text-[#d4af37]"></i>
+                <div class="text-xl md:text-2xl font-serif font-bold tracking-wide">
+                    Estrella <span class="text-[#d4af37]">40 y 20</span>
+                </div>
+            </div>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-6 text-sm tracking-widest uppercase font-semibold">
+                <a href="#inicio" class="hover:text-[#d4af37] transition">Inicio</a>
+                <a href="#menu" class="hover:text-[#d4af37] transition">Menú</a>
+                <a href="#tarot" class="text-[#d8b4fe] hover:text-white transition flex items-center gap-1">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i> La Vidente
+                </a>
+                <a href="#contacto" class="hover:text-[#d4af37] transition">Contacto</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none">
+                <i data-lucide="menu" class="w-8 h-8"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Nav Dropdown -->
+        <div id="mobile-menu" class="md:hidden bg-[#3e3123] text-center">
+            <a href="#inicio" class="block py-3 border-b border-stone-700 hover:bg-stone-800">Inicio</a>
+            <a href="#menu" class="block py-3 border-b border-stone-700 hover:bg-stone-800">Menú</a>
+            <a href="#tarot" class="block py-3 border-b border-stone-700 text-[#d8b4fe] hover:bg-stone-800">La Vidente del Amor</a>
+            <a href="#contacto" class="block py-3 hover:bg-stone-800">Contacto</a>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="inicio" class="relative py-12 md:py-20 text-center overflow-hidden">
+        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-7xl text-[#4a3b2a] mb-4">Bienvenido</h1>
+            <p class="text-xl text-[#8b5e3c] font-serif italic mb-12">"Donde el sabor casero se encuentra con el destino"</p>
+            
+            <!-- Polaroid Grid (Reference Image Style) -->
+            <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
+                <div class="polaroid w-64 transform -rotate-2">
+                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400&auto=format&fit=crop" alt="Comida" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <div class="text-center font-handwriting text-stone-600">Platillos Caseros</div>
+                </div>
+                <div class="polaroid w-64 transform rotate-3 z-10">
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop" alt="Hamburguesas" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <div class="text-center font-handwriting text-stone-600">Hamburguesas</div>
+                </div>
+                <div class="polaroid w-64 transform -rotate-1">
+                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400&auto=format&fit=crop" alt="Bebidas" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <div class="text-center font-handwriting text-stone-600">Licuados y Café</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MENU SECTION -->
+    <section id="menu" class="py-16 bg-white shadow-inner">
+        <div class="container mx-auto px-4">
+            <div class="ribbon-container">
+                <h2 class="ribbon font-serif">Nuestro Menú</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto mt-10">
+                
+                <!-- Columna 1: Comidas Principales -->
+                <div class="space-y-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl text-[#8b5e3c] font-bold border-b-2 border-[#8b5e3c] inline-block pb-2">Platillos Fuertes</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Menudo</span>
+                            <span class="text-sm text-[#8b5e3c] italic">Tradicional</span>
+                        </li>
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Caldo de Pollo</span>
+                            <span class="text-sm text-[#8b5e3c] italic">Con verduras</span>
+                        </li>
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Chilaquiles</span>
+                            <span class="text-sm text-[#8b5e3c] italic">Verdes o Rojos</span>
+                        </li>
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Pollo en Salsa</span>
+                        </li>
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Tacos de Bistec</span>
+                            <span class="text-sm text-[#8b5e3c] italic">Orden de 4</span>
+                        </li>
+                        <li class="flex justify-between items-baseline border-b border-dashed border-stone-300 pb-2">
+                            <span class="font-bold text-stone-700">Huevos al gusto</span>
+                            <span class="text-sm text-[#8b5e3c] italic">Desayuno</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Columna 2: Antojos -->
+                <div class="space-y-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl text-[#8b5e3c] font-bold border-b-2 border-[#8b5e3c] inline-block pb-2">Tortas y Burgers</h3>
+                    </div>
+                    <ul class="space-y-4">
+                        <li class="flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-stone-700">Torta de Jamón</span>
+                                <span class="text-xs text-stone-500">Aguacate, tomate, cebolla</span>
+                            </div>
+                            <span class="text-[#8b5e3c] font-bold">$</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-stone-700">Torta de Bistec</span>
+                            </div>
+                            <span class="text-[#8b5e3c] font-bold">$</span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-stone-700">Torta de Pollo</span>
+                            </div>
+                            <span class="text-[#8b5e3c] font-bold">$</span>
+                        </li>
+                        <li class="flex justify-between items-center bg-[#f4f1ea] p-3 rounded-lg">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-[#4a3b2a]">Hamburguesa Especial</span>
+                                <span class="text-xs text-stone-500">Carne de res, queso, papas</span>
+                            </div>
+                            <i data-lucide="star" class="w-4 h-4 text-yellow-500"></i>
+                        </li>
+                    </ul>
+                    
+                    <!-- Imagen decorativa pequeña -->
+                    <div class="mt-4 rounded-lg overflow-hidden h-32">
+                        <img src="https://images.unsplash.com/photo-1561758033-d89a9ad46330?q=80&w=400&auto=format&fit=crop" class="w-full h-full object-cover opacity-80" alt="Burger">
+                    </div>
+                </div>
+
+                <!-- Columna 3: Bebidas -->
+                <div class="space-y-8">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl text-[#8b5e3c] font-bold border-b-2 border-[#8b5e3c] inline-block pb-2">Barra de Bebidas</h3>
+                    </div>
+                    
+                    <div class="bg-[#f9f7f2] p-4 rounded border border-[#e6e2d8]">
+                        <h4 class="font-bold text-[#4a3b2a] mb-2 flex items-center gap-2"><i data-lucide="milk" class="w-4 h-4"></i> Licuados</h4>
+                        <p class="text-sm text-stone-600 mb-2">Chocomilk, Papaya, Plátano</p>
+                        
+                        <h4 class="font-bold text-[#4a3b2a] mb-2 mt-4 flex items-center gap-2"><i data-lucide="citrus" class="w-4 h-4"></i> Jugos Naturales</h4>
+                        <p class="text-sm text-stone-600 mb-2">Naranja, Zanahoria, Betabel</p>
+
+                        <h4 class="font-bold text-[#4a3b2a] mb-2 mt-4 flex items-center gap-2"><i data-lucide="droplets" class="w-4 h-4"></i> Aguas Frescas</h4>
+                        <p class="text-sm text-stone-600 mb-2">Jamaica, Piña, Pepino, Limonada</p>
+                        
+                        <div class="mt-4 pt-4 border-t border-stone-300">
+                            <span class="font-bold text-[#4a3b2a]">Café Caliente</span>
+                            <span class="float-right text-sm italic">Americano / Olla</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- TAROT SECTION -->
+    <section id="tarot" class="tarot-section py-20">
+        <!-- Elementos decorativos de fondo -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+             <div class="absolute top-10 left-10 text-6xl">✨</div>
+             <div class="absolute bottom-10 right-10 text-6xl">🌙</div>
+             <div class="absolute top-1/2 left-1/4 text-4xl">🔮</div>
+        </div>
+
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="text-center mb-12">
+                <div class="inline-block p-2 border border-[#d4af37] rounded-full mb-4">
+                    <i data-lucide="eye" class="w-8 h-8 text-[#d4af37]"></i>
+                </div>
+                <h2 class="text-4xl md:text-5xl tarot-title mb-2">La Vidente del Amor</h2>
+                <p class="text-[#d8b4fe] italic font-serif text-lg">"Las respuestas que buscas están en las cartas"</p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
+                <!-- Card Graphic -->
+                <div class="flex justify-center">
+                    <div class="w-64 h-96 relative card-flip cursor-pointer">
+                        <div class="card-inner w-full h-full relative">
+                            <!-- Dorso de la carta -->
+                            <div class="card-front bg-[#1a0b2e] border-4 border-[#d4af37] rounded-xl flex items-center justify-center shadow-2xl shadow-purple-500/50">
+                                <div class="text-center">
+                                    <div class="text-6xl mb-4">🎴</div>
+                                    <h3 class="font-serif text-[#d4af37] text-xl tracking-widest uppercase">Destino</h3>
+                                    <p class="text-xs text-[#a78bfa] mt-2">Toca para revelar</p>
+                                </div>
+                            </div>
+                            <!-- Frente de la carta -->
+                            <div class="card-back bg-[#fdfbf7] border-4 border-[#d4af37] rounded-xl flex flex-col items-center justify-center p-6 text-center">
+                                <h3 class="font-serif text-[#4a3b2a] text-2xl font-bold mb-2">El Sol</h3>
+                                <div class="text-6xl mb-4">☀️</div>
+                                <p class="text-stone-800 text-sm leading-relaxed">El éxito, la radiante alegría y la abundancia te esperan. Es un momento de claridad.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Services Info -->
+                <div class="space-y-8 text-center md:text-left">
+                    <div class="bg-white/10 backdrop-blur-sm p-6 rounded-lg gold-border">
+                        <h3 class="text-2xl text-[#d4af37] font-serif mb-4">Nuestros Servicios</h3>
+                        <ul class="space-y-4 text-lg">
+                            <li class="flex items-center gap-3 justify-center md:justify-start">
+                                <i data-lucide="user" class="text-[#d4af37]"></i>
+                                <span>Lecturas Personales (Presencial)</span>
+                            </li>
+                            <li class="flex items-center gap-3 justify-center md:justify-start">
+                                <i data-lucide="wifi" class="text-[#d4af37]"></i>
+                                <span>Lecturas a Distancia</span>
+                            </li>
+                            <li class="flex items-center gap-3 justify-center md:justify-start">
+                                <i data-lucide="heart" class="text-[#d4af37]"></i>
+                                <span>Especialidad en Amor y Pareja</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <button class="bg-[#d4af37] text-[#2e1065] px-8 py-3 rounded-full font-bold text-lg hover:bg-white transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                        Agendar Cita
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contacto" class="bg-[#2d241b] text-[#9ca3af] py-12 border-t-4 border-[#8b5e3c]">
+        <div class="container mx-auto px-4 text-center">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div>
+                    <h4 class="text-white font-serif text-xl mb-4">Ubicación</h4>
+                    <p>Calle Principal #40 y 20</p>
+                    <p>Zona Centro</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-xl mb-4">Horario</h4>
+                    <p>Lunes a Sábado</p>
+                    <p>8:00 AM - 6:00 PM</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-serif text-xl mb-4">Contacto</h4>
+                    <p>Tel: (555) 123-4567</p>
+                    <div class="flex justify-center gap-4 mt-4">
+                        <a href="#" class="hover:text-[#d4af37]"><i data-lucide="facebook"></i></a>
+                        <a href="#" class="hover:text-[#d4af37]"><i data-lucide="instagram"></i></a>
+                        <a href="#" class="hover:text-[#d4af37]"><i data-lucide="message-circle"></i></a>
+                    </div>
+                </div>
+            </div>
+            <p class="text-sm border-t border-stone-700 pt-6">
+                &copy; 2024 Restaurante Estrella 40 y 20 & La Vidente del Amor.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Inicializar Iconos
+        lucide.createIcons();
+
+        // Script menú móvil
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Cerrar menú al hacer click en un link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+    </script>
+</body>
+</html>
