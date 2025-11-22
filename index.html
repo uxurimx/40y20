@@ -6,20 +6,19 @@
     <title>Restaurante Estrella 40 y 20 | La Vidente del Amor</title>
     <!-- Tailwind CSS para estructura rápida y responsiva -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Fuentes de Google: Playfair Display (Elegante) y Lato (Lectura), Cinzel (Mística) -->
+    <!-- Fuentes de Google -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     <!-- Iconos (Lucide) -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* --- ESTILOS PERSONALIZADOS (CSS) --- */
-        
+        /* --- ESTILOS PERSONALIZADOS --- */
         :root {
-            --rest-bg: #f4f1ea; /* Beige suave imagen referencia */
-            --rest-accent: #8b5e3c; /* Café madera */
+            --rest-bg: #f4f1ea; 
+            --rest-accent: #8b5e3c; 
             --rest-dark: #4a3b2a;
-            --tarot-bg: #4c1d95; /* Lila/Morado oscuro */
-            --tarot-gold: #d4af37; /* Dorado */
+            --tarot-bg: #4c1d95; 
+            --tarot-gold: #d4af37; 
         }
 
         body {
@@ -28,12 +27,11 @@
             overflow-x: hidden;
         }
 
-        /* Tipografía de Títulos */
         h1, h2, h3, .font-serif {
             font-family: 'Playfair Display', serif;
         }
 
-        /* Efecto de Cinta (Ribbon) como en la imagen de referencia */
+        /* Cinta (Ribbon) */
         .ribbon-container {
             position: relative;
             text-align: center;
@@ -56,7 +54,7 @@
             border: 20px solid darken(var(--rest-accent), 20%);
         }
         
-        /* Estilo Polaroid para imágenes */
+        /* Estilo Polaroid - MODIFICADO: Siempre a color */
         .polaroid {
             background: white;
             padding: 10px 10px 30px 10px;
@@ -121,7 +119,7 @@
             max-height: 400px;
         }
 
-        /* Textura de papel sutil */
+        /* Textura */
         .paper-texture {
             background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
         }
@@ -170,18 +168,21 @@
             <h1 class="text-5xl md:text-7xl text-[#4a3b2a] mb-4">Bienvenido</h1>
             <p class="text-xl text-[#8b5e3c] font-serif italic mb-12">"Donde el sabor casero se encuentra con el destino"</p>
             
-            <!-- Polaroid Grid (Reference Image Style) -->
+            <!-- Polaroid Grid (Ya sin escala de grises) -->
             <div class="flex flex-wrap justify-center gap-6 md:gap-10 mb-12">
                 <div class="polaroid w-64 transform -rotate-2">
-                    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?q=80&w=400&auto=format&fit=crop" alt="Comida" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <!-- Se eliminó la clase 'grayscale' -->
+                    <img src="./img/huevosconchilaquiles.png" alt="Comida" class="w-full h-56 object-cover mb-2 hover:opacity-90 transition duration-500">
                     <div class="text-center font-handwriting text-stone-600">Platillos Caseros</div>
                 </div>
                 <div class="polaroid w-64 transform rotate-3 z-10">
-                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop" alt="Hamburguesas" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <!-- Se eliminó la clase 'grayscale' -->
+                    <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=400&auto=format&fit=crop" alt="Hamburguesas" class="w-full h-56 object-cover mb-2 hover:opacity-90 transition duration-500">
                     <div class="text-center font-handwriting text-stone-600">Hamburguesas</div>
                 </div>
                 <div class="polaroid w-64 transform -rotate-1">
-                    <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=400&auto=format&fit=crop" alt="Bebidas" class="w-full h-56 object-cover mb-2 grayscale hover:grayscale-0 transition duration-500">
+                    <!-- Se eliminó la clase 'grayscale' -->
+                    <img src="./img/licuadoscafe.png" alt="Bebidas" class="w-full h-56 object-cover mb-2 hover:opacity-90 transition duration-500">
                     <div class="text-center font-handwriting text-stone-600">Licuados y Café</div>
                 </div>
             </div>
@@ -240,19 +241,25 @@
                                 <span class="font-bold text-stone-700">Torta de Jamón</span>
                                 <span class="text-xs text-stone-500">Aguacate, tomate, cebolla</span>
                             </div>
-                            <span class="text-[#8b5e3c] font-bold">$</span>
+                            <span class="text-[#8b5e3c] font-bold"></span>
                         </li>
                         <li class="flex justify-between items-center">
                             <div class="flex flex-col">
                                 <span class="font-bold text-stone-700">Torta de Bistec</span>
                             </div>
-                            <span class="text-[#8b5e3c] font-bold">$</span>
+                            <span class="text-[#8b5e3c] font-bold"></span>
                         </li>
                         <li class="flex justify-between items-center">
                             <div class="flex flex-col">
                                 <span class="font-bold text-stone-700">Torta de Pollo</span>
                             </div>
-                            <span class="text-[#8b5e3c] font-bold">$</span>
+                            <span class="text-[#8b5e3c] font-bold"></span>
+                        </li>
+                        <li class="flex justify-between items-center">
+                            <div class="flex flex-col">
+                                <span class="font-bold text-stone-700">Milanesa</span>
+                            </div>
+                            <span class="text-[#8b5e3c] font-bold"></span>
                         </li>
                         <li class="flex justify-between items-center bg-[#f4f1ea] p-3 rounded-lg">
                             <div class="flex flex-col">
@@ -357,9 +364,9 @@
                         </ul>
                     </div>
                     
-                    <button class="bg-[#d4af37] text-[#2e1065] px-8 py-3 rounded-full font-bold text-lg hover:bg-white transition shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+                    <a href="https://wa.me/524881492936" target="_blank" class="bg-[#d4af37] text-[#2e1065] px-8 py-3 rounded-full font-bold text-lg hover:bg-white transition shadow-lg hover:shadow-xl transform hover:-translate-y-1 inline-block text-center">
                         Agendar Cita
-                    </button>
+                    </a>
                 </div>
             </div>
         </div>
@@ -371,26 +378,48 @@
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
                     <h4 class="text-white font-serif text-xl mb-4">Ubicación</h4>
-                    <p>Calle Principal #40 y 20</p>
-                    <p>Zona Centro</p>
+                    <p>Carretera 57</p>
+                    <p>KM 617</p>
                 </div>
                 <div>
                     <h4 class="text-white font-serif text-xl mb-4">Horario</h4>
-                    <p>Lunes a Sábado</p>
-                    <p>8:00 AM - 6:00 PM</p>
+                    <p>Lunes a Domingo</p>
+                    <p>Abierto 24 horas</p>
                 </div>
-                <div>
+                
+                <!-- COLUMNA DE CONTACTO MODIFICADA -->
+                <div class="flex flex-col items-center">
                     <h4 class="text-white font-serif text-xl mb-4">Contacto</h4>
-                    <p>Tel: (555) 123-4567</p>
-                    <div class="flex justify-center gap-4 mt-4">
+                    
+                    <!-- Enlaces para llamar directamente -->
+                    <a href="tel:+524881205423" class="block mb-2 hover:text-[#d4af37] transition flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> (488) 120 5423
+                    </a>
+                    <a href="tel:+524888851734" class="block mb-4 hover:text-[#d4af37] transition flex items-center gap-2">
+                        <i data-lucide="phone" class="w-4 h-4"></i> (488) 885 1734
+                    </a>
+
+                    <!-- Botones de WhatsApp -->
+                    <div class="flex flex-col gap-3 w-full max-w-[200px]">
+                        <a href="https://wa.me/524881205423" target="_blank" 
+                           class="bg-[#25D366] text-white px-4 py-2 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#1fb355] transition shadow-md">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp 1
+                        </a>
+                        <a href="https://wa.me/524888851734" target="_blank" 
+                           class="bg-[#25D366] text-white px-4 py-2 rounded-full font-bold text-sm flex items-center justify-center gap-2 hover:bg-[#1fb355] transition shadow-md">
+                            <i data-lucide="message-circle" class="w-4 h-4"></i> WhatsApp 2
+                        </a>
+                    </div>
+                    
+                    <!-- Iconos Sociales -->
+                    <div class="flex justify-center gap-4 mt-6">
                         <a href="#" class="hover:text-[#d4af37]"><i data-lucide="facebook"></i></a>
                         <a href="#" class="hover:text-[#d4af37]"><i data-lucide="instagram"></i></a>
-                        <a href="#" class="hover:text-[#d4af37]"><i data-lucide="message-circle"></i></a>
                     </div>
                 </div>
             </div>
             <p class="text-sm border-t border-stone-700 pt-6">
-                &copy; 2024 Restaurante Estrella 40 y 20 & La Vidente del Amor.
+                &copy; 2025 Restaurante Estrella 40 y 20 & La Vidente del Amor.
             </p>
         </div>
     </footer>
